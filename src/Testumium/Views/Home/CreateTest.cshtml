@@ -1,0 +1,84 @@
+﻿@section header {
+
+}
+
+<div class="container p-b-4">
+    <form role="form" action="#" class="go-form" id="selectTestTypeForm" method="get">
+        <h2 class="text-thin">Testing your website</h2>
+        <div class="row">
+            <div class="col-sm-9">
+                <input type="text" class="form-control input-lg" id="yourWebsite" placeholder="Enter your url" name="domain" />
+            </div>
+            <div class="col-sm-3">
+                <button type="button" class="btn btn-lg btn-primary btn-block" onclick="loadWebsite();">GO</button>
+            </div>
+        </div>
+        <div id="loading" class="text-center" style="display:none">
+            <img src="~/Content/images/loading.gif" />
+        </div>
+        <div id="loadAlert" class="alert">
+            <p>Loaded perfectly</p>
+        </div>
+        <h3 class="website-success" style="display:none">You can either describe the test yourself, or get free help from us. If you don’t want to spend time describing what and how to test, we will give you a call and set it up for free</h3>
+        <div class="website-success row" style="display:none">
+            <div class="col-sm-6">
+                <button type="submit" class="btn btn-lg btn-primary btn-block" onclick="return submitTo('@Url.Action("TellUsAboutYou", "Home")');">Get a call from us and setup the test together</button>
+                <p>Free and no sales pitch</p>
+            </div>
+            <div class="col-sm-6">
+                <button type="submit" class="btn btn-lg btn-primary btn-block" onclick="return submitTo('@Url.Action("CreateOwnTest", "Home")');">Create your own test in our software</button>
+            </div>
+        </div>
+        <input type="hidden" name="TestType" value="Manual" />
+    </form>
+</div>
+
+<script type="text/javascript">
+    var createTestData = {
+        loading: false
+    };
+
+    function loadWebsite() {
+        if (createTestData.loading == true) return;
+        createTestData.loading = true;
+
+        $('#loading').show();
+        $.ajax({
+            url: '@Url.Action("CheckWebsite", "Home")',
+            type: 'GET',
+            dataType: 'json',
+            data: { url: $('#yourWebsite').val() },
+            success: function () {
+                $('.website-success').show();
+                $('#loadAlert p').text('Loaded perfectly!');
+                $('#loadAlert').addClass('alert-success');
+                $('#loadAlert').removeClass('alert-danger');
+                $('#loadAlert').show();
+                $('#loading').hide();
+                $('.website-success').show();
+                createTestData.loading = false;
+            },
+            error: function () {
+                $('#loadAlert p').text('Loaded fail!');
+                $('#loadAlert').addClass('alert-danger');
+                $('#loadAlert').removeClass('alert-success');
+                $('#loadAlert').show();
+                $('#loading').hide();
+                $('.website-success').hide();
+                createTestData.loading = false;
+            }
+        });
+    }
+
+    function submitTo(actionUrl) {
+        $('#selectTestTypeForm').attr('action', actionUrl);
+        return true;
+    }
+
+    $(function () {
+        $('#yourWebsite').change(function () {
+            loadWebsite();
+        });
+    });
+</script>
+
