@@ -1,0 +1,12 @@
+﻿@model Testumium.Models.CreateTestViewModel
+
+<div class="container p-b-4">
+    @if (Model.TestType == Testumium.Domain.Data.TestType.Manual)
+    {
+        <h2>Great! We will contact you soon</h2>
+    }
+    else
+    {
+        <h2>Thanks, your test is set up now. We will send to you email every weeks</h2>
+    }
+</div>

@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Testumium</title>
+    <link type="text/css" rel="stylesheet" media="all" href="~/Content/font-awesome.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="~/Content/bootstrap.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="~/Content/bootstrap-theme.min.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="~/Content/css/main.css" />
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600" type="text/css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("header", false)
+</head>
+<body id="home">
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <span class="navbar-brand-img">
+                    <a href="/"><img src="~/Content/images/testumium.png" alt="" width="250" /></a>
+                </span>
+                <button type="button" class="navbar-toggle pull-right" data-toggle="collapse" data-target="#nav-mobile">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse" id="nav-mobile">
+                <ul class="nav navbar-nav nav-public navbar-right">
+                    <li><a href="@Url.Action("CreateTest", "Home")" class="scroll">Create test</a></li>
+                    <li><a href="@Url.Action("Prices", "Home")">Prices</a></li>
+                    <li><a href="@Url.Action("Contact", "Home")">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    @RenderBody()
+
+    <footer>
+        <div class="container">
+            <div class="brand">
+                &copy; Testumium
+            </div>
+            <div>
+                Hosted by <a href="https://www.linkedin.com/in/holdgaard">Lars Holdgaard</a><br />
+                Contact us at info@testumium.com
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,59 @@
+﻿@model Testumium.Models.ContactFormViewModel
+@section header {
+    <script type="text/javascript" src="~/Scripts/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}
+<div class="container p-b-4">
+    <h2>You are always welcome to contact us:</h2>
+
+    <address>
+        <abbr title="Email">Email:</abbr>
+        <a href="mailto: info@testumium.com"> info@testumium.com</a>
+        <br />
+        <abbr title="Phone">P:</abbr>
+        (+45) 61793650
+        <br />
+        <abbr title="Skype">Skype:</abbr>
+        Lars Holdgaard
+    </address>
+    
+    <form action="@Url.Action("Contact")" role="form" method="post">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success" style="display: block">
+                <p>@TempData["SuccessMessage"]</p>
+            </div>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger" style="display: block">
+                <p>@TempData["ErrorMessage"]</p>
+            </div>
+        }
+        <div class="form-group">
+            @Html.LabelFor(m => m.ContactName, "Name")
+            @Html.TextBoxFor(m => m.ContactName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.ContactName)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email, "E-mail")
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Email)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Phone, "Phone number")
+            @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Phone)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Company)
+            @Html.TextBoxFor(m => m.Company, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Comments, "Your questions")
+            @Html.TextAreaFor(m => m.Comments, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Phone)
+        </div>
+        <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+</div>
