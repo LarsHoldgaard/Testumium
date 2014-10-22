@@ -21,7 +21,7 @@ namespace Testumium.Models
         public string Email { get; set; }
         [Required]
         public string Phone { get; set; }
-        [Required, DataAnnotationsExtensions.Url]
+        [Required]
         public string WebsiteUrl { get; set; }
         public string Company { get; set; }
         public string Comments { get; set; }

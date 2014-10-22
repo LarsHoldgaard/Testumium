@@ -29,8 +29,9 @@ namespace Testumium.Controllers
             return View();
         }
 
-        public ActionResult CreateTest()
+        public ActionResult CreateTest(string query = "")
         {
+            ViewBag.Url = query;
             return View();
         }
 

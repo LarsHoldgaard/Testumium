@@ -1,4 +1,6 @@
-﻿@section header {
+﻿@using System.Data.Odbc
+@using System.Web.UI.WebControls
+@section header {
 
 }
 
@@ -7,7 +9,7 @@
         <h2 class="text-thin">Testing your website</h2>
         <div class="row">
             <div class="col-sm-9">
-                <input type="text" class="form-control input-lg" id="yourWebsite" placeholder="Enter your url" name="domain" />
+                <input type="text" class="form-control input-lg" id="yourWebsite" placeholder="Enter your url" name="domain" value="@ViewBag.Url" />
             </div>
             <div class="col-sm-3">
                 <button type="button" class="btn btn-lg btn-primary btn-block" onclick="loadWebsite();">GO</button>
@@ -21,17 +23,19 @@
                 <div id="loadAlert" class="alert">
                     <p><img src="~/Content/images/check.png" alt="" /> <span>Loaded perfectly</span></p>
                 </div>
-                <h3 class="website-success" style="display:none">You can either describe the test yourself, or get free help from us. If you don’t want to spend time describing what and how to test, we will give you a call and set it up for free</h3>
+                <h3 class="website-success" style="display:none">
+                    You can either describe the test yourself, or get free help from us.<br /><br />
+                    If you don’t want to spend time describing what and how to test, we will give you a call and set it up for free
+                </h3>
             </div>
         </div>
         <div class="website-success row" style="display:none">
             <div class="col-sm-6">
                 <div class="test-type-box">
                     <h4>Get a call from us and setup the test together</h4>
-                    <input type="radio" value="Manual" name="TestType" />
-                    <p>Free and no sales pitch</p>
+                    <input type="radio" value="Manual" name="TestType" checked="checked" />
                     <p class="text-center">
-                        <img src="~/Content/images/check.png" style="display: none" class="check"/>
+                        <img src="~/Content/images/check.png" class="check"/>
                     </p>
                 </div>
             </div>
@@ -54,7 +58,18 @@
     </form>
 </div>
 
+
+@if (!string.IsNullOrEmpty(ViewBag.Url))
+{
+    <script>
+        $(document).ready(function () {
+            loadWebsite();
+        });
+    </script>
+}
 <script type="text/javascript">
+    
+    
     var createTestData = {
         loading: false
     };

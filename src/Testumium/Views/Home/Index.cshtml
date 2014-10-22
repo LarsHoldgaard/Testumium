@@ -2,24 +2,34 @@
     <div class="container hero-content text-bright animated fadeInDown">
         <div class="row">
             <div class="col-md-12">
-                <h1>Free tests of your website by humans. Don’t let customers tell you the problems</h1>
+                <h1>Free tests of your website by humans<br />Don’t let customers tell you the problems</h1>
             </div>
             <div class="col-sm-8 col-sm-offset-2">
                 <h2>Enter your website and get started:</h2>
             </div>
             <div class="col-sm-12">
                 <form role="form" action="@Url.Action("CreateTest", "Home")" class="row go-form" method="get">
-                    <div class="col-sm-7">
-                        <input type="text" class="form-control input-lg" id="yourWebsite" placeholder="Enter your website" />
+                    <div class="col-sm-5 col-sm-offset-2">
+                        
+                        <input type="text" class="form-control input-lg" name="query" id="query" placeholder="Enter your website" />
                     </div>
-                    <div class="col-sm-5">
-                        <button type="submit" class="btn btn-lg btn-primary btn-block">Goto create test and prefill the url</button>
+                    <div class="col-sm-3">
+                        
+                            <button type="submit" class="btn btn-lg btn-primary btn-block">Go</button>    
+                        
+                        
                     </div>
                 </form>
             </div>
         </div>
-        <p>Free testing by human beings</p>
-        <p>Very easy to setup</p>
+        <div class="row" style="text-align: left;">
+            <div class ="col-sm-5 col-sm-offset-2">
+                <p><img src="@Url.Content("~/Content/images/check.png")" /> Free testing by human beings every week</p>
+                <p><img src="@Url.Content("~/Content/images/check.png")" /> Very easy to setup</p>
+                <p><img src="@Url.Content("~/Content/images/check.png")" /> No sales pitches. Pure awesomeness</p>
+            </div>
+            
+        </div>
     </div>
 </div>
 
@@ -33,7 +43,7 @@
         <div class="row m-t-1">
             <div class="col-sm-4 text-center">
                 <div class="figure">
-                    <img alt="" src="~/Content/images/dummy/how-1.png" />
+                    <img alt="" src="~/Content/images/1414023031_Hi-speed_internet-128.png">
                 </div>
                 <h3>It’s expensive to let customers tell you about problems.</h3>
                 <p>All websites has problems from time to time.</p>
@@ -43,9 +53,9 @@
             <div class="col-sm-4 text-center">
                 <div class="figure p-t-1">
                     <div class="img-overlap three">
-                        <img class="img-circle img-border" alt="" src="~/Content/images/dummy/of.png">
-                        <img class="img-circle img-border" alt="" src="~/Content/images/dummy/rb.png">
-                        <img class="img-circle img-border" alt="" src="~/Content/images/dummy/ag.jpeg">
+                        
+                        <img alt="" src="~/Content/images/1414023183_common_calendar_month_-256.png" style="text-align: center;">
+                        
                     </div>
                 </div>
                 <h3>You never get to test your less popular features.</h3>
@@ -55,7 +65,7 @@
             </div>
             <div class="col-sm-4 text-center">
                 <div class="figure">
-                    <img alt="" src="~/Content/images/dummy/how-2.png">
+                    <img alt="" src="~/Content/images/1414023123_imoticon_17-256.png" style="width: 130px; text-align: center;">
                 </div>
                 <h3>Errors frustrate users and damage your brand.</h3>
                 <p>When users see error pages or unexpected functionality it is very frustrating. That damages your brand,.</p>
@@ -80,10 +90,10 @@
         <h2 class="text-thin m-t-3 m-b-2">Get started:</h2>
         <form role="form" action="@Url.Action("CreateTest", "Home")" class="row go-form">
             <div class="col-sm-7">
-                <input type="text" class="form-control input-lg" id="yourWebsite" placeholder="Enter your website" />
+                <input type="text" class="form-control input-lg" name="query" id="query" placeholder="Enter your website" />
             </div>
             <div class="col-sm-5">
-                <button type="submit" class="btn btn-lg btn-primary btn-block">Goto create test and prefill the url</button>
+                <button type="submit" class="btn btn-lg btn-primary btn-block">Go</button>
             </div>
         </form>
     </div>
