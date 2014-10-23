@@ -10287,8 +10287,14 @@ body.airconf {
 .go-form input, .go-form input {
     margin-bottom: 10px;
 }
-.go-form button.btn-primary {
+.go-form button.btn-primary, .go-form button.btn-default {
     font-size: 20px;
+}
+.go-form button.btn-default {
+    background-color: #eee;
+}
+.go-form button.btn-default:hover {
+    background-color: #bbb;
 }
 h2 {
     color: #ce5424;
@@ -10298,12 +10304,14 @@ span.field-validation-error {
 }
 
 .test-type-box {
-    padding: 15px;
+    padding: 25px;
     border: 1px solid #ccc;
-    min-height: 170px;
 }
 .test-type-box.active {
     border-color: #3c763d
+}
+.test-type-box > div {
+    margin-top: 0px;
 }
 .test-type-box.active img {
     display: inline !important;

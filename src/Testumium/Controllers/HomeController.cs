@@ -9,6 +9,7 @@ using Testumium.Domain.Data;
 using Testumium.Domain.Models.Domain.Notifications;
 using Testumium.Domain.Models.Domain.Tests;
 using Testumium.Domain.Services;
+using Testumium.Helpers;
 using Testumium.Models;
 
 namespace Testumium.Controllers
@@ -20,7 +21,9 @@ namespace Testumium.Controllers
         private INotificationService notificationService;
         public HomeController()
         {
-            this.notificationService = new NotificationService(new DebugEmailSender());
+            IEmailSender sender = new SystemNetMailSender(Configurations.SMTPServer, Configurations.SMTPPort, 
+                Configurations.SMTPUsername, Configurations.SMTPPassword, Configurations.SMTPEnableSsl);
+            this.notificationService = new NotificationService(sender);
             this.testService = new TestService(new TestumiumEntities(), this.notificationService);
         }
 
@@ -69,7 +72,7 @@ namespace Testumium.Controllers
             return View();
         }
 
-        [HttpGet]
+        [HttpGet, ValidateInput(false)]
         public ActionResult TellUsAboutYou(string domain, TestType testType, string testList)
         {
             CreateTestViewModel model = new CreateTestViewModel();
@@ -79,7 +82,7 @@ namespace Testumium.Controllers
             return View(model);
         }
 
-        [HttpPost]
+        [HttpPost, ValidateInput(false)]
         public ActionResult TellUsAboutYou(CreateTestViewModel model)
         {
             try
@@ -95,6 +98,14 @@ namespace Testumium.Controllers
                 test.Comments = model.Comments;
                 test.TestType = model.TestType;
                 test.CallTime = model.CallTime;
+                if (!string.IsNullOrEmpty(model.TestList))
+                {
+                    TestItemViewModel[] testItems = JsonConvert.DeserializeObject<TestItemViewModel[]>(model.TestList);
+                    foreach (var item in testItems)
+                    {
+                        test.DbTestItems.Add(new DbTestItem() { Description = item.Description });
+                    }
+                }
                 this.testService.CreateTest(test);
                 return RedirectToAction("CreateTestCompleted", new { type = model.TestType.ToString() });
             }

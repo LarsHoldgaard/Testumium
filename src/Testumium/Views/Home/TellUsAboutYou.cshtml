@@ -7,7 +7,7 @@
 
 <div class="container p-b-4" id="creatOwnTest">
     <h2>Great, let’s test @Model.Domain.</h2>
-    <form action="@Url.Action("TellUsAboutYou")" role="form" method="post">
+    <form action="@Url.Action("TellUsAboutYou")" role="form" method="post" class="go-form">
         @if (TempData["ErrorMessage"] != null)
         {
             <div class="alert alert-danger" style="display: block">
@@ -60,6 +60,12 @@
         @Html.HiddenFor(m => m.Domain)
         @Html.HiddenFor(m => m.TestType)
         @Html.HiddenFor(m => m.TestList)
-        <button type="submit" class="btn btn-primary">Create test and get started</button>
+
+        <button type="submit" class="btn btn-lg btn-primary">Create test and get started</button>
+        @if (Model.TestType == Testumium.Domain.Data.TestType.OwnTest)
+        {
+        <button type="button" class="btn btn-lg btn-default" onclick="history.back(-1);">Go back</button>
+        }
+        
     </form>
 </div>

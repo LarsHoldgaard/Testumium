@@ -1,18 +1,30 @@
 ﻿@section header {
     <script type="text/javascript" src="~/Scripts/knockout-3.2.0.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/ckeditor/ckeditor.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/ckeditor/adapters/jquery.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/ckeditor/config.js")"></script>
 }
 <div class="container p-b-4" id="creatOwnTest">
     <h2>Create your own test: @ViewBag.Domain</h2>
-    <form action="@Url.Action("TellUsAboutYou")" role="form" method="get">
+    <form action="@Url.Action("TellUsAboutYou")" role="form" method="get" class="go-form">
         <!-- ko foreach: tests -->
         <div class="form-group">
             <label>Test <span data-bind="text: $index() + 1"></span>:</label>
-            <textarea class="form-control" data-bind="value: description"></textarea>
+            <div class="row">
+                <div class="col-md-8">
+                    <textarea data-bind="ckeditor: description, valueUpdate: 'afterkeydown'"></textarea>
+                </div>
+                <div class="col-md-4">
+                    <a href="javascript:;" data-bind="click: $parent.removeTest">Remove</a>
+                </div>
+            </div>
+            
         </div>
         <!-- /ko -->
         <a href="javascript:;" data-bind="click: addTest">Add more test</a>
         <br /><br />
-        <button type="submit" class="btn btn-primary" data-bind="click: save">Save test</button>
+        <button type="submit" class="btn btn-lg btn-primary" data-bind="click: save">Save test</button>
+        <button type="button" class="website-success btn btn-lg btn-default" onclick="history.back(-1);">Go back</button>
         <input type="hidden" name="testlist" id="testList" />
         <input type="hidden" name="testType" value="OwnTest" />
         <input type="hidden" name="domain" value="@ViewBag.Domain" />
@@ -20,6 +32,43 @@
 </div>
 
 <script type="text/javascript">
+    ko.bindingHandlers.ckeditor = {
+        init: function (element, valueAccessor, allBindingsAccessor, context) {
+            var options = allBindingsAccessor().ckeditorOptions || {};
+            var modelValue = valueAccessor();
+            var value = ko.utils.unwrapObservable(valueAccessor());
+
+            $(element).html(value);
+            $(element).ckeditor({
+                toolbar: 'Basic'
+            });
+
+            var editor = $(element).ckeditorGet();
+
+            //handle edits made in the editor
+            editor.on('change', function (e) {
+                var self = this;
+                if (ko.isWriteableObservable(self)) {
+                    self($(e.listenerData).val());
+                }
+            }, modelValue, element);
+
+            //handle disposal (if KO removes by the template binding)
+            ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
+                if (editor) {
+                    CKEDITOR.remove(editor);
+                };
+            });
+        },
+        update: function (element, valueAccessor, allBindingsAccessor, context) {
+            // handle programmatic updates to the observable
+            var newValue = ko.utils.unwrapObservable(valueAccessor());
+            if ($(element).ckeditorGet().getData() != newValue) {
+                $(element).ckeditorGet().setData(newValue)
+            }
+        }
+    };
+
     var TestItemViewModel = function () {
         var self = this;
         self.description = ko.observable('');
@@ -31,6 +80,11 @@
 
         self.addTest = function () {
             self.tests.push(new TestItemViewModel());
+        };
+
+        self.removeTest = function (test) {
+            if (!confirm('Are you sure you want to delete the test?')) return;
+            self.tests.remove(test);
         };
 
         self.save = function () {

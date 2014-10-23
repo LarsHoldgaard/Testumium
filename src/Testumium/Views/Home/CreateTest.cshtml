@@ -1,18 +1,18 @@
 ﻿@using System.Data.Odbc
 @using System.Web.UI.WebControls
 @section header {
-
+    <link type="text/css" rel="stylesheet" href="~/Content/css/awesome-bootstrap-checkbox.css" />
 }
 
 <div class="container p-b-4">
     <form role="form" action="#" class="go-form" id="selectTestTypeForm" method="get">
         <h2 class="text-thin">Testing your website</h2>
-        <div class="row">
+        <div class="row m-b-1">
             <div class="col-sm-9">
-                <input type="text" class="form-control input-lg" id="yourWebsite" placeholder="Enter your url" name="domain" value="@ViewBag.Url" />
+                <input type="text" class="form-control input-lg" id="yourWebsite" placeholder="Enter your url" name="domain" value="@ViewBag.Url" @(string.IsNullOrEmpty(ViewBag.Url) ? "" : "disabled=\"disable\"")/>
             </div>
             <div class="col-sm-3">
-                <button type="button" class="btn btn-lg btn-primary btn-block" onclick="loadWebsite();">GO</button>
+                <button id="goButton" type="button" class="btn btn-lg btn-primary btn-block" onclick="loadWebsite();">GO</button>
             </div>
         </div>
         <div class="row">
@@ -30,22 +30,24 @@
             </div>
         </div>
         <div class="website-success row" style="display:none">
-            <div class="col-sm-6">
-                <div class="test-type-box">
-                    <h4>Get a call from us and setup the test together</h4>
-                    <input type="radio" value="Manual" name="TestType" checked="checked" />
-                    <p class="text-center">
-                        <img src="~/Content/images/check.png" class="check"/>
-                    </p>
+            <div class="col-sm-6 m-b-1">
+                <div class="test-type-box active">
+                    <div class="radio radio-success radio-inline">
+                        <input type="radio" value="Manual" name="TestType" checked="checked" id="testTypeManual" />
+                        <label for="testTypeManual">
+                            Get a call from us and setup the test together
+                        </label>
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6 m-b-1">
                 <div class="test-type-box">
-                    <h4>Create your own test in our software</h4>
-                    <input type="radio" value="OwnTest" name="TestType" />
-                    <p class="text-center">
-                        <img src="~/Content/images/check.png" style="display: none" class="check" />
-                    </p>
+                    <div class="radio radio-success radio-inline">
+                        <input type="radio" value="OwnTest" name="TestType" id="testTypeOwnTest" />
+                        <label for="testTypeOwnTest">
+                            Create your own test in our software
+                        </label>
+                    </div>
                 </div>
             </div>
         </div>
@@ -58,18 +60,7 @@
     </form>
 </div>
 
-
-@if (!string.IsNullOrEmpty(ViewBag.Url))
-{
-    <script>
-        $(document).ready(function () {
-            loadWebsite();
-        });
-    </script>
-}
 <script type="text/javascript">
-    
-    
     var createTestData = {
         loading: false
     };
@@ -93,6 +84,7 @@
                 $('#loading').hide();
                 $('.website-success').show();
                 createTestData.loading = false;
+                $('#goButton').attr('disabled', 'disabled');
             },
             error: function () {
                 $('#loadAlert span').text('Loaded fail!');
@@ -122,13 +114,31 @@
     }
 
     $(function () {
-        $('#yourWebsite').change(function () {
+        $('#yourWebsite').focus(function () {
+            $('#goButton').removeAttr('disabled');
+        });
+        $('#yourWebsite').blur(function () {
             loadWebsite();
         });
         $('input[name=TestType]').change(function () {
             $('.test-type-box').removeClass('active');
-            $(this).closest('.test-type-box').addClass('active');
+            $('input[name=TestType]').each(function () {
+                if (this.checked == true) {
+                    $(this).closest('.test-type-box').addClass('active');
+                }
+            });
         });
+        $('.test-type-box').click(function () {
+            $(this).find('input[name=TestType]').each(function () {
+                this.checked = true;
+                $(this).trigger('change');
+            });
+        });
+
+        @if (!string.IsNullOrEmpty(ViewBag.Url))
+        {
+            <text>loadWebsite();</text>
+        }
     });
 </script>
 
