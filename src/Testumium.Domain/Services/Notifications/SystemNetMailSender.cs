@@ -28,6 +28,7 @@ namespace Testumium.Domain.Services
         public SystemNetMailSender(string host, int port, string username, string password, bool enableSsl)
             : this(host, port)
         {
+            logger.DebugFormat("{0}/{1}", username, password);
             smtpClient.Credentials = new System.Net.NetworkCredential(username, password);
             smtpClient.EnableSsl = enableSsl;
         }
@@ -62,12 +63,16 @@ namespace Testumium.Domain.Services
                 }
             }
 
-            foreach (var item in template.Attachments)
+            if (template.Attachments != null && template.Attachments.Count > 0)
             {
-                var att = new Attachment(item.FileName);
-                att.Name = item.Name;
-                mailMessage.Attachments.Add(att);
+                foreach (var item in template.Attachments)
+                {
+                    var att = new Attachment(item.FileName);
+                    att.Name = item.Name;
+                    mailMessage.Attachments.Add(att);
+                }
             }
+            
             try
             {
                 smtpClient.Send(mailMessage);

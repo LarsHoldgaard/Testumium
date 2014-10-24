@@ -9,10 +9,10 @@
         <h2 class="text-thin">Testing your website</h2>
         <div class="row m-b-1">
             <div class="col-sm-9">
-                <input type="text" class="form-control input-lg" id="yourWebsite" placeholder="Enter your url" name="domain" value="@ViewBag.Url" @(string.IsNullOrEmpty(ViewBag.Url) ? "" : "disabled=\"disable\"")/>
+                <input type="text" class="form-control input-lg" id="yourWebsite" placeholder="Enter your url" name="domain" value="@ViewBag.Url" />
             </div>
             <div class="col-sm-3">
-                <button id="goButton" type="button" class="btn btn-lg btn-primary btn-block" onclick="loadWebsite();">GO</button>
+                <button id="goButton" type="button" class="btn btn-lg btn-primary btn-block" onclick="loadWebsite();" @(string.IsNullOrEmpty(ViewBag.Url) ? "" : "disabled=\"disable\"")>GO</button>
             </div>
         </div>
         <div class="row">
@@ -78,6 +78,7 @@
             success: function () {
                 $('.website-success').show();
                 $('#loadAlert span').text('Loaded perfectly!');
+                $('#loadAlert img').show();
                 $('#loadAlert').addClass('alert-success');
                 $('#loadAlert').removeClass('alert-danger');
                 $('#loadAlert').show();
@@ -88,6 +89,7 @@
             },
             error: function () {
                 $('#loadAlert span').text('Loaded fail!');
+                $('#loadAlert img').hide();
                 $('#loadAlert').addClass('alert-danger');
                 $('#loadAlert').removeClass('alert-success');
                 $('#loadAlert').show();
