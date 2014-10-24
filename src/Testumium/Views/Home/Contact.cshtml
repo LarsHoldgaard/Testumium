@@ -17,7 +17,7 @@
         Lars Holdgaard
     </address>
     
-    <form action="@Url.Action("Contact")" role="form" method="post">
+    <form action="@Url.Action("Contact")" role="form" method="post" class="go-form">
         @if (TempData["SuccessMessage"] != null)
         {
             <div class="alert alert-success" style="display: block">
@@ -54,6 +54,6 @@
             @Html.TextAreaFor(m => m.Comments, new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.Phone)
         </div>
-        <button type="submit" class="btn btn-primary">Send</button>
+        <button type="submit" class="btn btn-lg btn-primary">Send</button>
     </form>
 </div>

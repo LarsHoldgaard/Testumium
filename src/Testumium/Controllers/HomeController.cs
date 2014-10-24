@@ -90,7 +90,7 @@ namespace Testumium.Controllers
                 DbTest test = new DbTest();
                 test.Name = string.Empty;
                 test.ContactName = model.ContactName;
-                test.Domain = model.Domain;
+                test.Domain = string.IsNullOrEmpty(model.Domain) ? string.Empty : model.Domain;
                 test.Email = model.Email;
                 test.Phone = model.Phone;
                 test.Company = model.Company;

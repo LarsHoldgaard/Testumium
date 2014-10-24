@@ -7,7 +7,7 @@
 
 <div class="container p-b-4" id="creatOwnTest">
     <h2>Great, let’s test @Model.Domain.</h2>
-    <form action="@Url.Action("TellUsAboutYou")" role="form" method="post" class="go-form">
+    <form action="@Url.Action("TellUsAboutYou", "Home", new { testType = Model.TestType, domain = Model.Domain, testList = Model.TestList })" role="form" method="post" class="go-form">
         @if (TempData["ErrorMessage"] != null)
         {
             <div class="alert alert-danger" style="display: block">

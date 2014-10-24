@@ -27,16 +27,6 @@ namespace Testumium.Domain.Services
             this.repository.DbTests.Add(test);
             this.repository.SaveChanges();
 
-            //if (test.DbTestItems != null && test.DbTestItems.Count > 0)
-            //{
-            //    foreach (var item in test.DbTestItems)
-            //    {
-            //        item.TestId = test.Id;
-            //        this.repository.DbTestItems.Add(item);
-            //    }
-            //    this.repository.SaveChanges();
-            //}
-
             if (test.TestType == TestType.Manual)
             {
                 notificationService.SendEmailToUserRequestManualTest(test);
