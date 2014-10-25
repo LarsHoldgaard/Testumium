@@ -29,11 +29,12 @@ namespace Testumium.Domain.Services
 
             if (test.TestType == TestType.Manual)
             {
-                notificationService.SendEmailToUserRequestManualTest(test);
+                notificationService.SendEmailToUserRequestAutomaticTest(test);
+                
             }
             else
             {
-                notificationService.SendEmailToUserRequestAutomaticTest(test);
+                notificationService.SendEmailToUserRequestManualTest(test);
             }
         }
     }
