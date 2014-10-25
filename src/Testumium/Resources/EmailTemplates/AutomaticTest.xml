@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<email-template>
+  <subject>
+    Your test at Testumium.com is now created
+  </subject>
+  <addresses>
+    <entry name="From" value="&lt;$FromMail$&gt;"></entry>
+    <entry name="To" value="$ToMail$"></entry>
+  </addresses>
+  <body format="text/html" encoding="utf-8">
+    <![CDATA[
+<html>
+  <body style="font-family: Arial, Helvertica, sans-serif;">
+Hi $Name$, <br />
+<br />
+Great! We will contact you soon, so we can setup the test together.
+<br />
+<p><b>Your information</b></p>
+Url: $Url$
+<br />
+Best regards,<br />
+Testumium.com
+
+</body>
+</html>
+    ]]>
+  </body>
+</email-template>

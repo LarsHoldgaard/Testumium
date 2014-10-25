@@ -35,6 +35,22 @@ namespace Testumium.Domain.Services
             Dispatch(new EmailMessage(emailTemplate));
         }
 
+
+        public void SendEmailToUserRequestAutomaticTest(Data.DbTest test)
+        {
+            string customerSupportEmail = GetSystemEmail();
+            string emailTemplatePath = Path.Combine(this.emailTemplatesFolder, string.Format("{0}.xml", "AutomaticTest"));
+
+            ParameterCollection parameters = new ParameterCollection();
+            parameters.Add("FromMail", customerSupportEmail);
+            parameters.Add("ToMail", test.Email);
+            parameters.Add("Url", test.Domain);
+
+            EmailTemplate emailTemplate = EmailUtility.ComposeTemplate(emailTemplatePath, parameters);
+            emailTemplate.Cc = new List<string>() { customerSupportEmail };
+            Dispatch(new EmailMessage(emailTemplate));
+        }
+
         public void GetHelpEmail(string name, string email, string phone, string company, string comments)
         {
             string customerSupportEmail = GetSystemEmail();

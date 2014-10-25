@@ -31,6 +31,10 @@ namespace Testumium.Domain.Services
             {
                 notificationService.SendEmailToUserRequestManualTest(test);
             }
+            else
+            {
+                notificationService.SendEmailToUserRequestAutomaticTest(test);
+            }
         }
     }
 }

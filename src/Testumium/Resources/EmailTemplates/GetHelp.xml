@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <email-template>
     <subject>
-        We will contact you soon to setup your test – Testumium.com
+        We will contact you soon – Testumium.com
     </subject>
     <addresses>
         <entry name="From" value="&lt;$FromMail$&gt;"></entry>
@@ -13,7 +13,7 @@
   <body style="font-family: Arial, Helvertica, sans-serif;">
 Hi $Name$, <br />
 <br />
-Great! We’ve now received your registration and will contact you as soon as possible.
+Great! We’ve now received your request and will contact you soon.
 <br />
 <br />
 Best regards,<br />

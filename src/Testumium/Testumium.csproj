@@ -225,6 +225,9 @@
     <Content Include="Content\css\main.less" />
     <Content Include="Content\css\awesome-bootstrap-checkbox.less" />
     <None Include="Properties\PublishProfiles\filedeploy.pubxml" />
+    <Content Include="Resources\EmailTemplates\AutomaticTest.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Scripts\ckeditor\CHANGES.md" />
     <Content Include="Scripts\ckeditor\LICENSE.md" />
     <Content Include="Scripts\ckeditor\plugins\colordialog\dialogs\colordialog.js" />
@@ -315,8 +318,12 @@
     <Content Include="Scripts\ckeditor\README.md" />
     <Content Include="Scripts\ckeditor\skins\moono\readme.md" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Resources\EmailTemplates\GetHelp.xml" />
-    <Content Include="Resources\EmailTemplates\ManualTest.xml" />
+    <Content Include="Resources\EmailTemplates\GetHelp.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Resources\EmailTemplates\ManualTest.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\ckeditor\adapters\jquery.js" />

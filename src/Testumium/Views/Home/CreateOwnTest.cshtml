@@ -5,11 +5,19 @@
     <script type="text/javascript" src="@Url.Content("~/Scripts/ckeditor/config.js")"></script>
 }
 <div class="container p-b-4" id="creatOwnTest">
-    <h2>Create your own test: @ViewBag.Domain</h2>
+    <h2>Create your own test on: @ViewBag.Domain</h2>
+    <h3>How to describe tests?</h3>
+    <ul>
+        <li>A single textbox should describe how to test a given functionality. If you want to test more than one functionality, click the "Add one more functionality to test" link below</li>
+        <li>It is important you describe what the tester should do in details, like 1) Open URL 2) Click the button "Register" 3) Enter XYZ into field with label "Name" and so forth</li>
+        <li>For each functionality to test, describe the expected outcome (what the tester should expect to see)</li>
+    </ul>
+    
+    <h3>Add the functionalities you want tested</h3>
     <form action="@Url.Action("TellUsAboutYou")" role="form" method="get" class="go-form">
         <!-- ko foreach: tests -->
         <div class="form-group">
-            <label>Test <span data-bind="text: $index() + 1"></span>:</label>
+            <label>Functionality to test <span data-bind="text: $index() + 1"></span>:</label>
             <div class="row">
                 <div class="col-md-8">
                     <textarea data-bind="ckeditor: description, valueUpdate: 'afterkeydown'"></textarea>
@@ -21,7 +29,7 @@
             
         </div>
         <!-- /ko -->
-        <a href="javascript:;" data-bind="click: addTest">Add more test</a>
+        <a href="javascript:;" data-bind="click: addTest">Add one more functionality to test</a>
         <br /><br />
         <button type="submit" class="btn btn-lg btn-primary" data-bind="click: save">Save test</button>
         <button type="button" class="website-success btn btn-lg btn-default" onclick="history.back(-1);">Go back</button>
