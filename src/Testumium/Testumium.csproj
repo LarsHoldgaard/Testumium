@@ -191,9 +191,14 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\css\awesome-bootstrap-checkbox.css" />
+    <Content Include="Content\css\awesome-bootstrap-checkbox.css">
+      <DependentUpon>awesome-bootstrap-checkbox.less</DependentUpon>
+    </Content>
     <Content Include="Content\css\main.css">
       <DependentUpon>main.less</DependentUpon>
+    </Content>
+    <Content Include="Content\css\main.min.css">
+      <DependentUpon>main.css</DependentUpon>
     </Content>
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
@@ -203,11 +208,6 @@
     <Content Include="Content\images\check.png" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\images\banner-home.jpg" />
-    <Content Include="Content\images\dummy\ag.jpeg" />
-    <Content Include="Content\images\dummy\how-1.png" />
-    <Content Include="Content\images\dummy\how-2.png" />
-    <Content Include="Content\images\dummy\of.png" />
-    <Content Include="Content\images\dummy\rb.png" />
     <Content Include="Content\images\testumium.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
