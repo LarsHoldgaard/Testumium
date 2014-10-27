@@ -5,16 +5,26 @@
     <script type="text/javascript" src="@Url.Content("~/Scripts/ckeditor/config.js")"></script>
 }
 <div class="container p-b-4" id="creatOwnTest">
-    <h2>Create your own test on: @ViewBag.Domain</h2>
-    <h3>How to describe tests?</h3>
-    <ul>
-        <li>A single textbox should describe how to test a given functionality. If you want to test more than one functionality, click the "Add one more functionality to test" link below</li>
-        <li>It is important you describe what the tester should do in details, like 1) Open URL 2) Click the button "Register" 3) Enter XYZ into field with label "Name" and so forth</li>
-        <li>For each functionality to test, describe the expected outcome (what the tester should expect to see)</li>
-    </ul>
-    
-    <h3>Add the functionalities you want tested</h3>
-    <form action="@Url.Action("TellUsAboutYou")" role="form" method="get" class="go-form">
+    <form action="@Url.Action("CreateOwnTest")" role="form" method="post" class="go-form">
+        <h2>Create your own test on: @ViewBag.Domain</h2>
+
+        <div class="form-group">
+            <h3>Go to manual test link:</h3>
+            <div class="row">
+                <div class="col-md-8">
+                    <input type="text" class="form-control" name="websiteUrl" />
+                </div>
+            </div>
+        </div>
+
+        <h3>How to describe tests?</h3>
+        <ul>
+            <li>A single textbox should describe how to test a given functionality. If you want to test more than one functionality, click the "Add one more functionality to test" link below</li>
+            <li>It is important you describe what the tester should do in details, like 1) Open URL 2) Click the button "Register" 3) Enter XYZ into field with label "Name" and so forth</li>
+            <li>For each functionality to test, describe the expected outcome (what the tester should expect to see)</li>
+        </ul>
+
+        <h3>Add the functionalities you want tested</h3>
         <!-- ko foreach: tests -->
         <div class="form-group">
             <label>Functionality to test <span data-bind="text: $index() + 1"></span>:</label>
@@ -26,7 +36,6 @@
                     <a href="javascript:;" data-bind="click: $parent.removeTest">Remove</a>
                 </div>
             </div>
-            
         </div>
         <!-- /ko -->
         <a href="javascript:;" data-bind="click: addTest">Add one more functionality to test</a>
@@ -36,7 +45,7 @@
         <input type="hidden" name="testlist" id="testList" />
         <input type="hidden" name="testType" value="OwnTest" />
         <input type="hidden" name="domain" value="@ViewBag.Domain" />
-    </form>
+</form>
 </div>
 
 <script type="text/javascript">

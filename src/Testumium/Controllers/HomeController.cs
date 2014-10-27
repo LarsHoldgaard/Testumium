@@ -66,19 +66,28 @@ namespace Testumium.Controllers
             return RedirectToAction("Contact");
         }
 
+        [HttpGet]
         public ActionResult CreateOwnTest(string domain)
         {
             ViewBag.Domain = domain;
             return View();
         }
 
+        [HttpPost, ValidateInput(false)]
+        public ActionResult CreateOwnTest(string domain, TestType testType, string websiteUrl, string testList)
+        {
+            Session.Add("TestList", testList);
+            return RedirectToAction("TellUsAboutYou", new { domain = domain, testType = testType, websiteUrl = websiteUrl });
+        }
+
         [HttpGet, ValidateInput(false)]
-        public ActionResult TellUsAboutYou(string domain, TestType testType, string testList)
+        public ActionResult TellUsAboutYou(string domain, TestType testType, string websiteUrl)
         {
             CreateTestViewModel model = new CreateTestViewModel();
             model.Domain = domain;
             model.TestType = testType;
-            model.TestList = testList;
+            model.TestList = (string)Session["TestList"];
+            model.WebsiteUrl = websiteUrl;
             return View(model);
         }
 
